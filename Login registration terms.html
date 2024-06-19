@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Driver Drowsiness</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body {
+
+background-image: url("http://getwallpapers.com/wallpaper/full/2/1/b/1503586-free-
+
+desktop-wallpaper-travel-1920x1080-for-xiaomi.jpg"); /* Adjust the URL to the path of your 
+
+image */
+
+background-size: cover; /* Cover the entire page */
+
+background-position: center; /* Center the background image */ 
+
+background-repeat: no-repeat; /* Do not repeat the image */ 
+
+display: flex;
+
+justify-content: center; 
+
+align-items: center; 
+
+height: 100vh;
+
+margin: 0;
+
+}
+
+.login-container {
+
+background-color: rgba(255, 255, 255, 0.8); 
+
+padding: 20px;
+
+border-radius: 10px; 
+
+max-width: 400px; 
+
+text-align: center;
+
+}
+
+/* Rest of your styles */
+</style>
+</head>
+<body>
+<div class="login-container">
+<h1>Driver Drowsiness</h1>
+<!-- Login Form -->
+<div id="loginForm">
+<h3>Enter your login credentials</h3>
+<form id="login-form" action="javascript:void(0);">
+<label for="first">Username:</label>
+<input type="text" id="first" name="first" placeholder="Enter your Username"
+required>
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" placeholder="Enter 
+your Password" required minlength="8">
+<label for="destination">Destination:</label>
+<input type="destination" id="destination" name="destination" 
+placeholder="Enter your destination place" required>
+<label for="country">Country:</label>
+<input type="text" id="country" name="country" placeholder="Enter your 
+country" required>
+<div class="wrap">
+<button type="submit">Submit</button>
+</div>
+</form>
+<p>Not registered?
+<a href="#" onclick="showRegisterForm()" style="text-decoration: none;">Create 
+an account</a>
+</p>
+</div>
+<!-- Register Form -->
+<div id="registerForm" style="display:none;">
+<h3>Create your account</h3>
+<form action="">
+<label for="newUsername">Username:</label>
+<input type="text" id="newUsername" name="newUsername" 
+placeholder="Choose a Username" required>
+<label for="newPassword">Password:</label>
+<input type="password" id="newPassword" name="newPassword" 
+placeholder="Choose a Password" required minlength="8">
+<label for="confirmPassword">Confirm Password:</label>
+<input type="password" id="confirmPassword" name="confirmPassword" 
+placeholder="Confirm your Password" required minlength="8">
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" placeholder="Enter your Email"
+required>
+<label for="city">City:</label>
+<input type="text" id="city" name="city" placeholder="Enter your city" required>
+<div class="wrap">
+<button type="submit">Register</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+document.getElementById('login-form').addEventListener('submit', function() {
+const username = document.getElementById('first').value; 
+
+document.querySelector('.login-container').innerHTML = `
+
+<h1>To travel is to make a journey into yourself:) Welcome, ${username}!</h1>
+
+<p>Let's start your journey with us.</p>
+
+<div> 
+
+style.css/
+
+body {
+
+display: flex;
+
+align-items: center; 
+
+justify-content: center; 
+
+font-family:sans-serif; 
+
+line-height: 1.5;
+
+min-height: 100vh; 
+
+background: #f3f3f3; 
+
+flex-direction: column; 
+
+margin: 0;
+
+background-image:url() ;
+
+}
+
+main {
+
+background-color: #fff; 
+
+border-radius: 15px;
+
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+
+padding: 10px 20px;
+
+transition: transform 0.2s; 
+
+width: 500px;
+
+text-align: center;
+
+}
+
+h1 {
+
+color: #3684a5;
+label {
+display: block; 
+width: 100%; 
+margin-top: 10px; 
+margin-bottom: 5px; 
+text-align: left; 
+color: #555;
+font-weight: bold;
+}
+input {
+display: block; 
+width: 100%;
+margin-bottom: 15px; 
+padding: 10px;
+box-sizing: border-box; 
+border: 1px solid #ddd; 
+border-radius: 5px;
+background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */ 
+color: #333; /* Ensuring text color is darker for readability */
+}
+input:focus {
+border-color: #3684a5; /* Change focus border color to match the h1 color */ 
+background-color: rgba(255, 255, 255, 0.8); /* Less transparency on focus to enhance
+visibility */
+outline: none; /* Optional: Removes the default focus outline */
+}
+button {
+padding: 15px;
+border-radius: 10px; 
+margin-top: 15px; 
+margin-bottom: 15px; 
+border: none;
+color: white; 
+cursor: pointer;
+background-color: #d42f3f; 
+width: 100%;
+font-size: 16px;
+}
+.wrap {
+display: flex;
+justify-content: center; 
+align-items: center;
+}
