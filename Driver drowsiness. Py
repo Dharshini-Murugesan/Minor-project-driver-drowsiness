@@ -1,0 +1,65 @@
+import cv2 
+import dlib
+import numpy as np
+from scipy.spatial import distance as dist 
+from google.colab import files
+import matplotlib.pyplot as plt
+# Define the EAR calculation function 
+def eye_aspect_ratio(eye):
+A = dist.euclidean(eye[1], eye[5])
+B = dist.euclidean(eye[2], eye[4])
+C = dist.euclidean(eye[0], eye[3]) 
+ear = (A + B) / (2.0 * C)
+return ear
+# Download and extract the shape predictor model
+!wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+!bunzip2 shape_predictor_68_face_landmarks.dat.bz2
+# Initialize dlib's face detector and create the facial landmark predictor 
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat") 
+# EAR threshold for sleepiness detection
+EYE_AR_THRESH = 0.3
+# Upload an image file 
+uploaded = files.upload()
+# Load the uploaded image
+image_path = list(uploaded.keys())[0] 
+image = cv2.imread(image_path)
+# Convert the image to grayscale
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+# Detect faces in the grayscale image
+rects = detector(gray, 0)
+# Check if any face is detected 
+if len(rects) == 0:
+print("No face detected.") 
+else:
+for rect in rects:
+shape = predictor(gray, rect)
+shape = np.array([(shape.part(i).x, shape.part(i).y) for i in range(68)]) 
+# Extract the left and right eye coordinates
+leftEye = shape[42:48] 
+rightEye = shape[36:42]
+# Compute the EAR for both eyes 
+leftEAR = eye_aspect_ratio(leftEye) 
+rightEAR = eye_aspect_ratio(rightEye) 
+# Average the EAR values
+ear = (leftEAR + rightEAR) / 2.0
+# Determine sleepiness based on EAR 
+if ear < EYE_AR_THRESH:
+result = "SLEEPY"
+color = (0, 0, 255) # Red color for sleepy
+else:
+result = "AWAKE"
+color = (0, 255, 0) # Green color for awake 
+# Draw contours around the eyes
+leftEyeHull = cv2.convexHull(leftEye) 
+rightEyeHull = cv2.convexHull(rightEye)
+cv2.drawContours(image, [leftEyeHull], -1, color, 1)
+cv2.drawContours(image, [rightEyeHull], -1, color, 1) 
+# Add text indicating the result
+cv2.putText(image, f"EAR: {ear:.2f} - {result}", (10, 30), 
+cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+# Display the resulting image
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+plt.imshow(image_rgb)
+plt.axis('off') 
+plt.show()
